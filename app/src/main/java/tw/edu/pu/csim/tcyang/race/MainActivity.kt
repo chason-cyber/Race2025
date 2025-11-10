@@ -33,10 +33,6 @@ class MainActivity : ComponentActivity() {
 
         val screenWidthPx = bounds.width().toFloat()
         val screenHeightPx = bounds.height().toFloat()
-
-
-
-
         setContent {
             RaceTheme {
                 GameScreen(message = "橫式螢幕，隱藏狀態列")
