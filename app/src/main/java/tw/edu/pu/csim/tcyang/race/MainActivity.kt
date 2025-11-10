@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.window.layout.WindowMetricsCalculator
 import tw.edu.pu.csim.tcyang.race.ui.theme.RaceTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,13 +25,21 @@ class MainActivity : ComponentActivity() {
         val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
         windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
 
+        WindowCompat.setDecorFitsSystemWindows(
+            window, false)
+        val windowMetricsCalculator = WindowMetricsCalculator.getOrCreate()
+        val currentWindowMetrics= windowMetricsCalculator.computeCurrentWindowMetrics(this)
+        val bounds = currentWindowMetrics.bounds
+
+        val screenWidthPx = bounds.width().toFloat()
+        val screenHeightPx = bounds.height().toFloat()
 
 
 
 
         setContent {
             RaceTheme {
-                GameScreen(message = "橫式螢幕，隱藏狀態列" )
+                GameScreen(message = "橫式螢幕，隱藏狀態列")
                 }
             }
         }
