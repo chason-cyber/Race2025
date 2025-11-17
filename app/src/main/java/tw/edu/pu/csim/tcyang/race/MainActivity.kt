@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
 
         val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
-        // 修正：一次性隱藏所有系統列，包含狀態列和導覽列
+
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         WindowCompat.setDecorFitsSystemWindows(
             window, false)

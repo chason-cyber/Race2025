@@ -15,18 +15,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun GameScreen(message: String, gameViewModel: GameViewModel) {
+
+    val imageBitmap = ImageBitmap.imageResource(R.drawable.horse0)
+
     val myName = "陳宇謙"
 
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Color.Yellow)
     ){
-        // ... (Canvas 保持不變)
         Canvas (modifier = Modifier.fillMaxSize()
             .pointerInput(Unit) {
                 detectDragGestures { change, dragAmount ->
@@ -40,9 +46,12 @@ fun GameScreen(message: String, gameViewModel: GameViewModel) {
                 radius = 100f,
                 center = Offset(gameViewModel.circleX, gameViewModel.circleY)
             )
+            drawImage(
+                image = imageBitmap,
+                dstOffset = IntOffset(0, 100),
+                dstSize = IntSize(200, 200)
+            )
         }
-
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -61,7 +70,7 @@ fun GameScreen(message: String, gameViewModel: GameViewModel) {
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Button(onClick = {
-                    gameViewModel.score = 0 // 確保分數從 0 開始
+                    gameViewModel.score = 0
                     gameViewModel.StartGame()
                 }) {
                     Text("遊戲開始")
